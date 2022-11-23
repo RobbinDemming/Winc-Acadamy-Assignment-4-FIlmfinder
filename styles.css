@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+* {
+  font-family: "Anton", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  color: rgb(37, 38, 37);
+}
+
+body {
+  max-width: 1366px;
+  margin: auto;
+  overflow-y: scroll;
+}
+
+#filmfinder-header {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 50px;
+}
+#filmfinder-header h1 {
+  background: linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 35%, rgb(0, 145, 208) 100%);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+#text-search {
+  text-align: center;
+  margin-top: 50px;
+}
+#text-search #search-button {
+  cursor: pointer;
+}
+
+#radio-button-nav__ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 100px;
+}
+#radio-button-nav__ul input {
+  margin: 10px;
+  cursor: pointer;
+}
+#radio-button-nav__ul span {
+  cursor: pointer;
+}
+
+#movie-archive__ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 100px;
+  margin: 50px;
+}
+#movie-archive__ul li {
+  display: flex;
+  align-self: center;
+  cursor: pointer;
+}
+#movie-archive__ul li a img {
+  box-shadow: 10px 10px 20px 10px lightgray;
+}
+#movie-archive__ul li a img:hover {
+  transform: scale(0.99);
+}
+#movie-archive__ul li a img:active {
+  transform: scale(0.985);
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  #filmfinder-header h1 {
+    font-size: 50px;
+  }
+  #radio-button-nav__ul {
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  #movie-archive__ul {
+    gap: 50px;
+  }
+  #movie-archive__ul li a img {
+    transform: scale(1);
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 768px) {
+  #filmfinder-header h1 {
+    font-size: 40px;
+  }
+  #radio-button-nav__ul {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+}
+@media only screen and (max-width: 320px) {
+  #filmfinder-header {
+    font-size: 30px;
+  }
+}/*# sourceMappingURL=styles.css.map */

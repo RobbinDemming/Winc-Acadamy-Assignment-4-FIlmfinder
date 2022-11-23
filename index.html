@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script defer src="movie-data.mjs" type="module"></script>
+    <script defer src="filmfinder.mjs" type="module"></script>
+    <title>Film Finder</title>
+  </head>
+  <body>
+    <header id="filmfinder-header">
+      <h1>Winc Filmfinder</h1>
+    </header>
+
+    <div id="text-search">
+      <input
+        type="search"
+        name="text-search"
+        id="search-bar"
+        placeholder="Movie title.."
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Movie title..'"
+      />
+      <button type="button" id="search-button">
+        Search
+      </button>
+      <button type="reset" id="reset-button">Reset</button>
+    </div>
+
+    <nav id="radio-button-nav">
+      <ul id="radio-button-nav__ul">
+        <li>
+          <label for="latest-movies"
+            ><input
+              type="radio"
+              name="movie-filter"
+              value="latest"
+              id="latest-movies"
+            /><span>Latest Movies, 2014 or newer</span></label
+          >
+        </li>
+        <li>
+          <label for="avengers-movies"
+            ><input
+              type="radio"
+              name="movie-filter"
+              value="avengers"
+              id="avengers-movies"
+            /><span>Avenger Movies</span></label
+          >
+        </li>
+        <li>
+          <label for="x-men-movies"
+            ><input
+              type="radio"
+              name="movie-filter"
+              value="x-men"
+              id="x-men-movies"
+            /><span>X-Men Movies</span></label
+          >
+        </li>
+        <li>
+          <label for="princess-movies"
+            ><input
+              type="radio"
+              name="movie-filter"
+              value="princess"
+              id="princess-movies"
+            /><span>Princess Movies</span></label
+          >
+        </li>
+        <li>
+          <label for="batman-movies"
+            ><input
+              type="radio"
+              name="movie-filter"
+              value="batman"
+              id="batman-movies"
+            /><span>Batman Movies</span></label
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <main id="movie-archive">
+      <ul id="movie-archive__ul"></ul>
+    </main>
+  </body>
+</html>
