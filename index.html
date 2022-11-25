@@ -23,9 +23,7 @@
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = 'Movie title..'"
       />
-      <button type="button" id="search-button">
-        Search
-      </button>
+      <button type="button" id="search-button">Search</button>
       <button type="reset" id="reset-button">Reset</button>
     </div>
 
@@ -38,7 +36,7 @@
               name="movie-filter"
               value="latest"
               id="latest-movies"
-            /><span>Latest Movies, 2014 or newer</span></label
+            /><span>Latest Movies (2014 or later)</span></label
           >
         </li>
         <li>
@@ -85,6 +83,7 @@
     </nav>
 
     <main id="movie-archive">
+      <p id="search-result"></p>
       <ul id="movie-archive__ul"></ul>
     </main>
   </body>

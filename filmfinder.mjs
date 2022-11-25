@@ -12,7 +12,7 @@ const addMoviesToDom = (array) => {
 
     
         li.appendChild(a)
-        a.setAttribute("href", "https://www.imdb.com/") // KOMT HIER DE IMDB-LINK FUNCTIE IN TE STAAN???
+        a.setAttribute("href", "https://www.imdb.com/title/" + movie.imdbID)
         a.setAttribute("target", "_blank")
         a.appendChild(img)
         img.src = movie.poster
@@ -29,10 +29,6 @@ const addMoviesToDom = (array) => {
 
 addMoviesToDom(movies);
 
-
-
-
-
 // RADIOBUTTONS EVENTLISTENERS
 
 const addEventListenersToRadioButtons = () => {
@@ -42,27 +38,23 @@ const addEventListenersToRadioButtons = () => {
     radioButtons.forEach(button => {
         button.addEventListener("change", (e) => {
             handleOnChangeEvent(e);
+            searchResults(e);
         });
     });
 };
 
 addEventListenersToRadioButtons();
 
-
-
-
-
 // HANDLEONCHANGE FUNCTION
 
-const handleOnChangeEvent = (event) => {  // ACTIVATED IN THE "addEventListeners()" FUNCTION 
+const handleOnChangeEvent = (e) => {  // ACTIVATED IN THE "addEventListeners()" FUNCTION 
     const moviesUl = document.getElementById("movie-archive__ul");
-    // moviesUl.innerHTML = ""; // THIS DELETES ALL CURRENT MOVIES FROM THE DOM FIRST BEFORE ADDING NEW ONES.
-    // moviesUl.replaceChildren(); // OR LIKE THIS.
-    while (moviesUl.firstChild) { // OR LIKE THIS.
+
+    while (moviesUl.firstChild) { 
         moviesUl.removeChild(moviesUl.lastChild);
     }
 
-     switch (event.target.value) { // THE SWITCHSTATEMENT ADDS THE NEW MOVIES TO THE DOM WITH THE FILTERFUNCTIONS BELOW. 
+     switch (e.target.value) { // THE SWITCHSTATEMENT ADDS THE NEW MOVIES TO THE DOM WITH THE FILTERFUNCTIONS BELOW. 
         case "latest": 
             filterLatestMovies();
             break;
@@ -98,9 +90,6 @@ const handleOnChangeEvent = (event) => {  // ACTIVATED IN THE "addEventListeners
 
 };
 
-
-
-
 // MOVIE FILTER FUNCTIONS
 
 const filterMoviesByWord = (wordInMovie) => { // ACTIVATED IN THE "handleOnChangeEvent()" FUNCTION
@@ -109,53 +98,64 @@ const filterMoviesByWord = (wordInMovie) => { // ACTIVATED IN THE "handleOnChang
 };
 
 const filterLatestMovies = () => {
-    const filteredMovies = movies.filter(movie => movie.year > 2014)
+    const filteredMovies = movies.filter(movie => movie.year > 2014);
     return addMoviesToDom(filteredMovies);
 };
 
+// SEARCH RESULTS FUNCTION
 
+const searchResults = (e) => {
 
-// IK SNAP NIET HOE IK DEZE FUNCTIE MOET OPZETTEN..
+    const searchString = searchBar.value;
+    const resultCount = document.getElementById("movie-archive__ul").children.length
+    const searchResult = document.getElementById("search-result")
+    const radioHtml = document.querySelector("span").innerHTML; // <---------------------------------------------------------------
 
-const imdbLink = (imdbID) => {
-
+    switch(e.target.type) {
+        case "search":
+            searchResult.innerHTML = resultCount + " Results found on '" + searchString + "'";
+        break
+        case "button":
+            searchResult.innerHTML = resultCount + " Results found on '" + searchString + "'";
+        break
+        case "radio":
+            searchResult.innerHTML = resultCount + " Results found on '" + radioHtml + "'"; // <------------------------------------
+        break
+    };
 };
 
-imdbLink();
-
-
-
-
-
-
-
-// SEARCHBAR AND BUTTONS FUNCTIONS
+// SEARCHBAR AND ITS BUTTONS EVENTLISTENERS
 
 const searchBar = document.getElementById("search-bar");
 const searchButton = document.getElementById("search-button");
 const resetButton = document.getElementById("reset-button");
 
-searchButton.addEventListener("click", () => {
-    const moviesUl = document.getElementById("movie-archive__ul");
-    const searchString = searchBar.value.toLowerCase();
-    const filteredMovies = movies.filter((movie) => {
-        return (movie.title.toLocaleLowerCase().includes(searchString));
-    });
-    if (searchBar.value) {
-    moviesUl.innerHTML = "";
-    addMoviesToDom(filteredMovies);
-    }
+searchBar.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && searchBar.value) {
+       e.preventDefault();
+       searchButton.click();
+       searchResults(e);
+       }
 });
 
-searchBar.addEventListener("keypress", (e) => {
- if (e.key === "Enter" && searchBar.value) {
-    e.preventDefault();
-    searchButton.click();
+searchButton.addEventListener("click", (e) => {
+    const moviesUl = document.getElementById("movie-archive__ul");
+    const searchString = searchBar.value.toLowerCase();
+    const filteredMovies = movies.filter(movie => movie.title.toLocaleLowerCase().includes(searchString));
+    
+    if (searchBar.value) {
+    moviesUl.replaceChildren();
+    addMoviesToDom(filteredMovies);
+    searchResults(e);
     }
 });
 
 resetButton.addEventListener("click", () => {
     const moviesUl = document.getElementById("movie-archive__ul");
-    moviesUl.innerHTML = "";
+    const searchResult = document.getElementById("search-result")
+    moviesUl.replaceChildren();
     addMoviesToDom(movies);
+    searchResult.innerHTML = "";
+    searchBar.value = "";
 });
+
