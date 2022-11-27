@@ -109,7 +109,7 @@ const searchResults = (e) => {
     const searchString = searchBar.value;
     const resultCount = document.getElementById("movie-archive__ul").children.length
     const searchResult = document.getElementById("search-result")
-    const radioHtml = document.querySelector("span").innerHTML; // <---------------------------------------------------------------
+    const radioHtml = e.target.id;
 
     switch(e.target.type) {
         case "search":
