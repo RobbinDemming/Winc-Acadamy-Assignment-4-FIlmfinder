@@ -4,6 +4,12 @@ import {movies} from './movie-data.mjs'
 
 const addMoviesToDom = (array) => {
 
+    const moviesUl = document.getElementById("movie-archive__ul");
+
+    while (moviesUl.firstChild) { 
+        moviesUl.removeChild(moviesUl.lastChild);
+    }
+
     const movieLis = array.map(movie => {
 
         const li = document.createElement("li");
@@ -48,11 +54,6 @@ addEventListenersToRadioButtons();
 // HANDLEONCHANGE FUNCTION
 
 const handleOnChangeEvent = (e) => {  // ACTIVATED IN THE "addEventListeners()" FUNCTION 
-    const moviesUl = document.getElementById("movie-archive__ul");
-
-    while (moviesUl.firstChild) { 
-        moviesUl.removeChild(moviesUl.lastChild);
-    }
 
      switch (e.target.value) { // THE SWITCHSTATEMENT ADDS THE NEW MOVIES TO THE DOM WITH THE FILTERFUNCTIONS BELOW. 
         case "latest": 
@@ -107,8 +108,8 @@ const filterLatestMovies = () => {
 const searchResults = (e) => {
 
     const searchString = searchBar.value;
-    const resultCount = document.getElementById("movie-archive__ul").children.length
-    const searchResult = document.getElementById("search-result")
+    const resultCount = document.getElementById("movie-archive__ul").children.length;
+    const searchResult = document.getElementById("search-result");
     const radioHtml = e.target.id;
 
     switch(e.target.type) {
@@ -131,31 +132,34 @@ const searchButton = document.getElementById("search-button");
 const resetButton = document.getElementById("reset-button");
 
 searchBar.addEventListener("keypress", (e) => {
+
     if (e.key === "Enter" && searchBar.value) {
        e.preventDefault();
        searchButton.click();
        searchResults(e);
        }
+
 });
 
 searchButton.addEventListener("click", (e) => {
-    const moviesUl = document.getElementById("movie-archive__ul");
+
     const searchString = searchBar.value.toLowerCase();
     const filteredMovies = movies.filter(movie => movie.title.toLocaleLowerCase().includes(searchString));
     
     if (searchBar.value) {
-    moviesUl.replaceChildren();
     addMoviesToDom(filteredMovies);
     searchResults(e);
     }
+
 });
 
 resetButton.addEventListener("click", () => {
-    const moviesUl = document.getElementById("movie-archive__ul");
-    const searchResult = document.getElementById("search-result")
-    moviesUl.replaceChildren();
+
+    const searchResult = document.getElementById("search-result");
+
     addMoviesToDom(movies);
     searchResult.innerHTML = "";
     searchBar.value = "";
+
 });
 
