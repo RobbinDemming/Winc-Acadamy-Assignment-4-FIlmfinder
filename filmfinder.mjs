@@ -130,7 +130,7 @@ const searchBar = document.getElementById("search-bar");
 const searchButton = document.getElementById("search-button");
 const resetButton = document.getElementById("reset-button");
 
-searchBar.addEventListener("keypress", (e) => {
+searchBar.addEventListener("keyup", (e) => {
 
     if (e.key === "Enter" && searchBar.value) {
        e.preventDefault();
