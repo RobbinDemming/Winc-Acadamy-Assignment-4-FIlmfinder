@@ -28,7 +28,6 @@ const addMoviesToDom = (array) => {
     });
 
     movieLis.forEach(element => {
-        const moviesUl = document.getElementById("movie-archive__ul");
         moviesUl.appendChild(element)
     });
 };
