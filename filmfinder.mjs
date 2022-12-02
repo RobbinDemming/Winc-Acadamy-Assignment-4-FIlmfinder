@@ -119,7 +119,7 @@ const searchResults = (e) => {
             searchResult.innerHTML = resultCount + " Results found on '" + searchString + "'";
         break
         case "radio":
-            searchResult.innerHTML = resultCount + " Results found on '" + radioHtml + "'"; // <------------------------------------
+            searchResult.innerHTML = resultCount + " Results found on '" + radioHtml + "'";
         break
     };
 };
